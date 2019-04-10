@@ -1,4 +1,5 @@
 require ('custom-env').env()
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
@@ -36,28 +37,27 @@ const login = (req, res, next) => {
         res.redirect('/login')
     }
   }
-  
+
   passport.use(new LocalStrategy(
-    (username, password, done) => {
-        if (username !== process.env.USER || password !== process.env.PASS) {
-            console.log("fout")
-            done(null, false, {message: 'Incorrect credentials.'});
-            return;
-        }
-        console.log("Ingelogd")
-        return done(null, {id: process.env.USER}); // returned object usally contains something to identify the user
+    function(username, password, done) {
+      User.findOne({ username: username }, function (err, user) {
+        if (err) { return done(err); }
+        if (!user) { return done(null, false); }
+        if (!user.verifyPassword(password)) { return done(null, false); }
+        return done(null, user);
+      });
     }
-));
+  ));
   
-  passport.serializeUser(function(user, cb) {
-    console.log('Serial')
-    cb(null, user.id);
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+ 
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function (err, user) {
+    done(err, user);
   });
-  
-  passport.deserializeUser(function(id, cb) {
-    console.log('Deserial')
-    cb(null, {id: id});
-  });
+});
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/views/index.html')
@@ -71,11 +71,11 @@ app.get('/login', (req, res) => {
     res.sendFile(__dirname + '/views/loginPage.html')
 });
 
-app.post('/login', (req, res) => {
-    passport.authenticate('local', { 
-        successRedirect: '/index', 
-        failureRedirect: '/login' })
-});
+app.post('/login', 
+  passport.authenticate('local', { failureRedirect: '/login' }),
+  function(req, res) {
+    res.redirect('/');
+  });
 
 app.post('/register', (req, res) => {
     console.log(req.body)
