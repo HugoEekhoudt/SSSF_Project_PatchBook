@@ -12,7 +12,7 @@ app.use(bodyParser())
 app.use(session({ secret: process.env.SessionSeed, resave: false, saveUninitialized: false }))
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(passport.initialize());
-app.use(passport.session())
+app.use(passport.session());
 
 
 var Schema = mongoose.Schema;
@@ -39,15 +39,22 @@ const login = (req, res, next) => {
   }
 
   passport.use(new LocalStrategy(
+ 
     function(username, password, done) {
-      User.findOne({ username: username }, function (err, user) {
-        if (err) { return done(err); }
-        if (!user) { return done(null, false); }
-        if (!user.verifyPassword(password)) { return done(null, false); }
-        return done(null, user);
-      });
-    }
-  ));
+       User.findOne({ username: username }, function(err, user) {
+       if (err) { return done(err); }
+        if (!user)
+        {
+                 return done(null, false, { message: 'Incorrect username.' });
+        }
+            if (!user.password == password)
+       {
+               return done(null, false, { message: 'Incorrect password.' });
+             }
+       return done(null, user, { message: 'correct user.' });
+       });
+       }
+   ));
   
 passport.serializeUser(function(user, done) {
   done(null, user.id);
@@ -59,7 +66,7 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
-app.get('/', (req, res) => {
+app.get('/', login, (req, res) => {
     res.sendFile(__dirname + '/views/index.html')
 });
 
@@ -88,7 +95,7 @@ app.post('/register', (req, res) => {
 });
 
 app.get('/logout', (req, res) => {
-    req.logout()
+    req.logOut()
     res.redirect('/login')
 });
 
