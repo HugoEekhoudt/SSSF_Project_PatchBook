@@ -22,6 +22,15 @@ var userSchema = new Schema({
 });
 const User = mongoose.model('User', userSchema);
 
+var patchSchema = mongoose.Schema;
+var patchSchema = new patchSchema({
+  name:  String,
+  description: String,
+  image: String,
+  userID: String
+});
+const Patch = mongoose.model('Patch', patchSchema);
+
 // if mongoose < 5.x, force ES6 Promise
 // mongoose.Promise = global.Promise;
 mongoose.connect(`mongodb://${process.env.DB_USER}:${process.env.DB_PWD}@${process.env.DB_HOST}:${process.env.DB_PORT}/test`).then(() => {
@@ -78,10 +87,18 @@ app.get('/login', (req, res) => {
     res.sendFile(__dirname + '/views/loginPage.html')
 });
 
+app.get('/createPatch', login, (req, res) => {
+  res.sendFile(__dirname + '/views/createPatch.html')
+});
+
 app.post('/login', 
   passport.authenticate('local', { failureRedirect: '/login' }),
   function(req, res) {
     res.redirect('/');
+  });
+
+  app.get('/user', login, function(req, res) {
+    res.send(req.user)
   });
 
 app.post('/register', (req, res) => {
@@ -92,6 +109,14 @@ app.post('/register', (req, res) => {
         console.log('Error getting the posts');
     });
      res.sendFile(__dirname + '/views/loginPage.html')
+});
+
+app.post('/createPatch', login, (req, res) => {
+  console.log(req.body)
+  Patch.create(req.body).then(post => {
+     console.log(post.id);
+  });
+  res.redirect('/');
 });
 
 app.get('/logout', (req, res) => {

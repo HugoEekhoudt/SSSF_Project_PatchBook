@@ -3,7 +3,7 @@
 <head>
     <meta  charset="UTF-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>index</title>
+    <title>create patch</title>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -29,17 +29,35 @@
           </form>
         </div>
       </nav>
-      <script type="text/javascript">
-      const http = new XMLHttpRequest();
-      const url ='http://localhost:3000/user';
-      http.open("Get", url);
-      http.send();
-      http.onreadystatechange = (error)=> {
-          if (http.readyState === 4) {
-            var data = JSON.parse(http.response);
-              document.querySelector('.pNavBar').innerHTML += data.username
-          }
-      }
-      </script>
+<div class="container">
+  <h1>Create a new Patch</h1>
+  <form method="POST" action="/createPatch">
+  <div class="form-group">
+    <label>name of the patch</label>
+    <input type="text" class="form-control" name="name" placeholder="name">
+    <label>description for the patch</label>
+    <input type="text" class="form-control" name="description" placeholder="description">
+    <label>image of the patch</label> <br>
+    <input type="file" name="image">
+    <input type="hidden" type="text" name="userID" id="idUser"> <br> <br>
+    <input class="btn btn-primary" type="submit" value="add">
+  </div>
+</form>
+</div>
+
+
+<script type="text/javascript">
+  const http = new XMLHttpRequest();
+const url ='http://localhost:3000/user';
+http.open("Get", url);
+http.send();
+http.onreadystatechange = (error)=> {
+if (http.readyState === 4) {
+  var data = JSON.parse(http.response);
+    document.querySelector('.pNavBar').innerHTML += data.username
+    document.getElementById('idUser').value= data._id
+}
+}
+</script>
 </body>
 </html>
