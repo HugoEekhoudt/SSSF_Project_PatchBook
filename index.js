@@ -13,6 +13,7 @@ app.use(session({ secret: process.env.SessionSeed, resave: false, saveUninitiali
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use("/images",express.static('images'))
 
 
 var Schema = mongoose.Schema;
@@ -87,6 +88,12 @@ app.get('/login', (req, res) => {
     res.sendFile(__dirname + '/views/loginPage.html')
 });
 
+app.get('/patches', login,(req, res) => {
+  Patch.find().then(result => {
+    res.send(result)
+  });
+});
+
 app.get('/createPatch', login, (req, res) => {
   res.sendFile(__dirname + '/views/createPatch.html')
 });
@@ -97,12 +104,17 @@ app.post('/login',
     res.redirect('/');
   });
 
-  app.get('/user', login, function(req, res) {
-    res.send(req.user)
+app.get('/user', login, function(req, res) {
+  res.send(req.user)
+});
+
+app.get('/userByID', login, function(req, res) {
+  User.find({_id: req.query.userID}).then(result => {
+    res.send(result)
   });
+});
 
 app.post('/register', (req, res) => {
-    console.log(req.body)
     User.create({username: req.body.regUsername, password: req.body.regPassword}).then(post => {
         console.log(post.id);
      }).catch(function(error){
@@ -112,7 +124,6 @@ app.post('/register', (req, res) => {
 });
 
 app.post('/createPatch', login, (req, res) => {
-  console.log(req.body)
   Patch.create(req.body).then(post => {
      console.log(post.id);
   });
