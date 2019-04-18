@@ -15,23 +15,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use("/images",express.static('images'))
 
-
-var Schema = mongoose.Schema;
-var userSchema = new Schema({
-  username:  String,
-  password: String,
-});
-const User = mongoose.model('User', userSchema);
-
-var patchSchema = mongoose.Schema;
-var patchSchema = new patchSchema({
-  name:  String,
-  description: String,
-  image: String,
-  userID: String
-});
-const Patch = mongoose.model('Patch', patchSchema);
-
 // if mongoose < 5.x, force ES6 Promise
 // mongoose.Promise = global.Promise;
 mongoose.connect(`mongodb://${process.env.DB_USER}:${process.env.DB_PWD}@${process.env.DB_HOST}:${process.env.DB_PORT}/test`).then(() => {
@@ -88,14 +71,15 @@ app.get('/login', (req, res) => {
     res.sendFile(__dirname + '/views/loginPage.html')
 });
 
-app.get('/patches', login,(req, res) => {
+app.get('/createPatch', login, (req, res) => {
+  res.sendFile(__dirname + '/views/createPatch.html')
+});
+
+//Checked with postman
+app.get('/patches',(req, res) => {
   Patch.find().then(result => {
     res.send(result)
   });
-});
-
-app.get('/createPatch', login, (req, res) => {
-  res.sendFile(__dirname + '/views/createPatch.html')
 });
 
 app.post('/login', 
@@ -108,19 +92,23 @@ app.get('/user', login, function(req, res) {
   res.send(req.user)
 });
 
-app.get('/userByID', login, function(req, res) {
+//Checked with postman
+app.get('/userByID', function(req, res) {
   User.find({_id: req.query.userID}).then(result => {
     res.send(result)
   });
 });
 
+//Checked with postman
 app.post('/register', (req, res) => {
-    User.create({username: req.body.regUsername, password: req.body.regPassword}).then(post => {
+  console.log(req.body)
+    User.create({username: req.body.username, password: req.body.password}).then(post => {
         console.log(post.id);
+        res.send(post)
      }).catch(function(error){
         console.log('Error getting the posts');
+        res.send(error)
     });
-     res.sendFile(__dirname + '/views/loginPage.html')
 });
 
 app.post('/createPatch', login, (req, res) => {
