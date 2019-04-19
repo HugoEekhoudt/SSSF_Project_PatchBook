@@ -7,6 +7,7 @@ var bodyParser = require('body-parser')
 const session = require('express-session')
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
+const apiRouter = require('./routers/apiRouter');
 
 app.use(bodyParser())
 app.use(session({ secret: process.env.SessionSeed, resave: false, saveUninitialized: false }))
@@ -14,6 +15,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use("/images",express.static('images'))
+app.use('/api', apiRouter)
 
 // if mongoose < 5.x, force ES6 Promise
 // mongoose.Promise = global.Promise;
@@ -57,70 +59,6 @@ passport.deserializeUser(function(id, done) {
   User.findById(id, function (err, user) {
     done(err, user);
   });
-});
-
-app.get('/', login, (req, res) => {
-    res.sendFile(__dirname + '/views/index.html')
-});
-
-app.get('/index', login, (req, res) => {
-    res.sendFile(__dirname + '/views/index.html')
-});
-
-app.get('/login', (req, res) => {
-    res.sendFile(__dirname + '/views/loginPage.html')
-});
-
-app.get('/createPatch', login, (req, res) => {
-  res.sendFile(__dirname + '/views/createPatch.html')
-});
-
-//Checked with postman
-app.get('/patches',(req, res) => {
-  Patch.find().then(result => {
-    res.send(result)
-  });
-});
-
-app.post('/login', 
-  passport.authenticate('local', { failureRedirect: '/login' }),
-  function(req, res) {
-    res.redirect('/');
-  });
-
-app.get('/user', login, function(req, res) {
-  res.send(req.user)
-});
-
-//Checked with postman
-app.get('/userByID', function(req, res) {
-  User.find({_id: req.query.userID}).then(result => {
-    res.send(result)
-  });
-});
-
-//Checked with postman
-app.post('/register', (req, res) => {
-  console.log(req.body)
-    User.create({username: req.body.username, password: req.body.password}).then(post => {
-        console.log(post.id);
-        res.send(post)
-     }).catch(function(error){
-        console.log('Error getting the posts');
-        res.send(error)
-    });
-});
-
-app.post('/createPatch', login, (req, res) => {
-  Patch.create(req.body).then(post => {
-     console.log(post.id);
-  });
-  res.redirect('/');
-});
-
-app.get('/logout', (req, res) => {
-    req.logOut()
-    res.redirect('/login')
 });
 
 app.listen(3000); 
