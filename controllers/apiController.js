@@ -47,3 +47,23 @@ exports.rating_create_post = (data) => {
     return err;
   });
 };
+
+exports.patch_update_single = (data) => {
+  return Patch.updateOne({_id: data.idOfPatchToUpdate},{name: data.name, description: data.description, image: data.image}, (err, data) => {
+    return {status: 'Update OK: ' + data};
+  }).catch((err) => {
+    console.log(err);
+    return err;
+  });
+};
+
+exports.patch_delete_single = (id) => {
+  return Patch.deleteOne({_id: id}).then((patch) => {
+  return Rating.deleteOne({patchID: id}).then((rating) => {
+    return {status: 'Delete Patch OK: ' + patch.id + ' ' + rating.id };
+  }).catch((err) => {
+    console.log(err);
+    return err;
+  });
+});
+};

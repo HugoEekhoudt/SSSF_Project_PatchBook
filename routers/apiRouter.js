@@ -36,6 +36,22 @@ router.post('/patch', (req, res) => {
 });
 
 //Checked with postman
+router.patch('/patch', (req, res) => {
+  const data = req.body;
+  console.log(data);
+  apiController.patch_update_single(data).then((result) => {
+    res.send(result);
+  });
+});
+
+//Checked with postman
+router.delete('/patch', (req, res) => {
+  apiController.patch_delete_single(req.query.patchID).then((result) => {
+    res.send(result);
+  });
+});
+
+//Checked with postman
 router.post('/rating', (req, res) => {
   const data = req.body;
   console.log(data);
