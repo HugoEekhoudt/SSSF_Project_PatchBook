@@ -30,6 +30,15 @@ exports.user_create_post = (data) => {
     });
   };
 
+exports.user_update_single = (data) => {
+    return User.updateOne({_id: data.idOfUserToUpdate},{username: data.username, password: data.password}, (err, data) => {
+      return {status: 'Update OK: ' + data};
+    }).catch((err) => {
+      console.log(err);
+      return err;
+    });
+};
+
 exports.patch_create_post = (data) => {
     return Patch.create(data).then((patch) => {
       return {status: 'Save OK: ' + patch.id};

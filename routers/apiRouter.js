@@ -18,6 +18,15 @@ router.get('/user', function(req, res) {
 });
 
 //Checked with postman
+router.patch('/user', (req, res) => {
+  const data = req.body;
+  console.log(data);
+  apiController.user_update_single(data).then((result) => {
+    res.send(result);
+  });
+});
+
+//Checked with postman
 router.post('/register', (req, res) => {
     const data = req.body;
     console.log(data);
