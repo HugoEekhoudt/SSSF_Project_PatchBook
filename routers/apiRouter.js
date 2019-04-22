@@ -69,4 +69,13 @@ router.post('/rating', (req, res) => {
   });
 });
 
+//Checked with postman
+router.post('/linkedpatch', (req, res) => {
+  const data = req.body;
+  console.log(data);
+  apiController.linkedpatch_create_post(data).then((result) => {
+    res.send(result);
+  });
+});
+
 module.exports = router;

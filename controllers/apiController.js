@@ -2,6 +2,7 @@
 const User = require('../models/Users');
 const Patch = require('../models/patches');
 const Rating = require('../models/ratings');
+const LinkedPatch = require('../models/linkedpatches');
 
 exports.patches_list_get = () => {
     return Patch.find().then((patches) => {
@@ -31,7 +32,7 @@ exports.user_create_post = (data) => {
   };
 
 exports.user_update_single = (data) => {
-    return User.updateOne({_id: data.idOfUserToUpdate},{username: data.username, password: data.password}, (err, data) => {
+    return User.updateOne({_id: data.idOfUserToUpdate},{username: data.username, password: data.password, overall: data.overall}, (err, data) => {
       return {status: 'Update OK: ' + data};
     }).catch((err) => {
       console.log(err);
@@ -51,6 +52,15 @@ exports.patch_create_post = (data) => {
 exports.rating_create_post = (data) => {
   return Rating.create(data).then((rating) => {
     return {status: 'Save OK: ' + rating.id};
+  }).catch((err) => {
+    console.log(err);
+    return err;
+  });
+};
+
+exports.linkedpatch_create_post = (data) => {
+  return LinkedPatch.create(data).then((linkedPatch) => {
+    return {status: 'Save OK: ' + linkedPatch.id};
   }).catch((err) => {
     console.log(err);
     return err;
