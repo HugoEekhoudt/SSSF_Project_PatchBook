@@ -20,7 +20,6 @@ router.get('/user', function(req, res) {
 //Checked with postman
 router.patch('/user', (req, res) => {
   const data = req.body;
-  console.log(data);
   apiController.user_update_single(data).then((result) => {
     res.send(result);
   });
@@ -29,7 +28,6 @@ router.patch('/user', (req, res) => {
 //Checked with postman
 router.post('/register', (req, res) => {
     const data = req.body;
-    console.log(data);
     apiController.user_create_post(data).then((result) => {
       res.send(result);
     });
@@ -38,7 +36,6 @@ router.post('/register', (req, res) => {
 //Checked with postman
 router.post('/patch', (req, res) => {
     const data = req.body;
-    console.log(data);
     apiController.patch_create_post(data).then((result) => {
       res.send(result);
     });
@@ -47,7 +44,6 @@ router.post('/patch', (req, res) => {
 //Checked with postman
 router.patch('/patch', (req, res) => {
   const data = req.body;
-  console.log(data);
   apiController.patch_update_single(data).then((result) => {
     res.send(result);
   });
@@ -63,7 +59,6 @@ router.delete('/patch', (req, res) => {
 //Checked with postman
 router.post('/rating', (req, res) => {
   const data = req.body;
-  console.log(data);
   apiController.rating_create_post(data).then((result) => {
     res.send(result);
   });
@@ -72,7 +67,6 @@ router.post('/rating', (req, res) => {
 //Checked with postman
 router.post('/linkedpatch', (req, res) => {
   const data = req.body;
-  console.log(data);
   apiController.linkedpatch_create_post(data).then((result) => {
     res.send(result);
   });

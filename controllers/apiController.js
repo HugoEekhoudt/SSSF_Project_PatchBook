@@ -50,21 +50,41 @@ exports.patch_create_post = (data) => {
 };
 
 exports.rating_create_post = (data) => {
+  return Patch.find({_id: data.patchID}).then((patch) => {
+    if(patch[0].userID == data.userID) {
+      return {status: 'Save ERROR: The patch belongs to this current user'};
+    }
+
+    return Rating.find({patchID: data.patchID, userID: data.userID}).then((rating) => {
+      console.log(rating)
+      if(rating[0] != null) {
+        return {status: 'Save ERROR: The patch already has a rating from this user'};
+      }
+
   return Rating.create(data).then((rating) => {
     return {status: 'Save OK: ' + rating.id};
   }).catch((err) => {
     console.log(err);
     return err;
   });
+});
+});
 };
 
 exports.linkedpatch_create_post = (data) => {
+
+  return User.find({_id: data.userID}).then((user) => {
+    if(user[0].overall == false) {
+      return {status: 'Save ERROR: The user does not have a overall'};
+    }
+
   return LinkedPatch.create(data).then((linkedPatch) => {
     return {status: 'Save OK: ' + linkedPatch.id};
   }).catch((err) => {
     console.log(err);
     return err;
   });
+});
 };
 
 exports.patch_update_single = (data) => {
