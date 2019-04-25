@@ -4,6 +4,12 @@ const router = express.Router();
 const apiController = require('../controllers/apiController');
 
 //Checked with postman
+router.get('/',(req, res) => {
+  res.sendFile(__dirname + '/index.html')
+});
+
+
+//Checked with postman
 router.get('/patches',(req, res) => {
     apiController.patches_list_get().then((result) => {
         res.send(result);

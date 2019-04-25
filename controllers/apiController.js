@@ -78,12 +78,18 @@ exports.linkedpatch_create_post = (data) => {
       return {status: 'Save ERROR: The user does not have a overall'};
     }
 
+    return LinkedPatch.find({patchID: data.patchID, userID: data.userID}).then((linkedPatch) => {
+      if(linkedPatch[0] != null) {
+        return {status: 'Save ERROR: The user already linked this patch to his overall'};
+      }
+
   return LinkedPatch.create(data).then((linkedPatch) => {
     return {status: 'Save OK: ' + linkedPatch.id};
   }).catch((err) => {
     console.log(err);
     return err;
   });
+});
 });
 };
 
