@@ -61,4 +61,6 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
+app.use("/apidoc", express.static('./apidocs'))
+
 app.listen(3000); 
