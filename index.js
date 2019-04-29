@@ -7,7 +7,11 @@ var bodyParser = require('body-parser')
 const session = require('express-session')
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const apiRouter = require('./routers/apiRouter');
+const indexRouter = require('./routers/indexRouter');
+const patchRouter = require('./routers/patchRouter');
+const linkedPatchRouter = require('./routers/linkedPatchRouter');
+const userRouter = require('./routers/userRouter');
+const ratingRouter = require('./routers/ratingRouter');
 
 app.use(bodyParser())
 app.use(session({ secret: process.env.SessionSeed, resave: false, saveUninitialized: false }))
@@ -15,7 +19,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use("/images",express.static('images'))
-app.use('/api', apiRouter)
+app.use('/api', indexRouter, patchRouter, linkedPatchRouter, userRouter, ratingRouter)
 
 // if mongoose < 5.x, force ES6 Promise
 // mongoose.Promise = global.Promise;

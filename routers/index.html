@@ -1,52 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta  charset="UTF-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>index</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <title>index</title>
 </head>
+
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand">Patchbook</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-              <li class="nav-item active">
-                  <form>
-                    <input type="button" onclick="register()" value="register">
-                    </form>
-                </li>
-            <li class="nav-item active">
-              <form>
-                <input type="button" onclick="getAllPatches()" value="show all Patches">
-                </form>
-            </li>
-            <li class="nav-item active">
-                <form>
-                  <input type="button" onclick="createPatch()" value="create Patch">
-                  </form>
-              </li>
-              <li class="nav-item active">
-                  <form>
-                    <input type="button" onclick="createRating()" value="create Rating">
-                    </form>
-                </li>
-          </ul>
-        </div>
-      </nav>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand">Patchbook</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-      <div class="container">
-      <div class="tab-content">
-      </div>
-      </div>
-      <script>
-        const http = new XMLHttpRequest();
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <form>
+            <input type="button" onclick="register()" value="register">
+          </form>
+        </li>
+        <li class="nav-item active">
+          <form>
+            <input type="button" onclick="getAllPatches()" value="show all Patches">
+          </form>
+        </li>
+        <li class="nav-item active">
+          <form>
+            <input type="button" onclick="createPatch()" value="create Patch">
+          </form>
+        </li>
+        <li class="nav-item active">
+          <form>
+            <input type="button" onclick="createRating()" value="create Rating">
+          </form>
+        </li>
+      </ul>
+    </div>
+  </nav>
 
-        function register(){
-          document.querySelector('.tab-content').innerHTML = `
+  <div class="container">
+    <div class="tab-content">
+    </div>
+  </div>
+  <script>
+    const http = new XMLHttpRequest();
+
+    function register() {
+      document.querySelector('.tab-content').innerHTML = `
           <form style="margin-top: 10px" method="POST" action="/api/register">
             <div class="form-group">
               <input type="text" class="form-control" name="username" placeholder="Username">
@@ -63,10 +67,10 @@
             </div>
             <button type="submit" class="btn btn-warning">Register</button>
           </form>`
-        }
+    }
 
-        function createPatch(){
-          document.querySelector('.tab-content').innerHTML = `
+    function createPatch() {
+      document.querySelector('.tab-content').innerHTML = `
           <form method="POST" action="/api/patch">
   <div class="form-group">
     <label>name of the patch</label>
@@ -79,21 +83,22 @@
     <input class="btn btn-primary" type="submit" value="add">
   </div>
 </form>`
-        }
+    }
 
-        function createRating(){
-          document.querySelector('.tab-content').innerHTML = ``
-                          url ='http://localhost:3000/api/patches';
-                          http.open("Get", url);
-                          http.send();
-                          http.onreadystatechange = (error)=> {
-                              if (http.readyState === 4) {
-                                JSON.parse(http.response).forEach(element => {
-                                  document.querySelector('.selectClass').innerHTML += `<option value="${element._id}">${element.name}</option>`
-                                }
-                                );}
-                            }   
-                        document.querySelector('.tab-content').innerHTML += `<form method="POST" action="/api/rating">
+    function createRating() {
+      document.querySelector('.tab-content').innerHTML = ``
+      url = 'http://localhost:3000/api/patches';
+      http.open("Get", url);
+      http.send();
+      http.onreadystatechange = (error) => {
+        if (http.readyState === 4) {
+          JSON.parse(http.response).forEach(element => {
+            document.querySelector('.selectClass').innerHTML += `<option value="${element._id}">${element.name}</option>`
+          }
+          );
+        }
+      }
+      document.querySelector('.tab-content').innerHTML += `<form method="POST" action="/api/rating">
             <div class="form-group">
               <label>rating amount</label>
               <input type="number" class="form-control" name="ratingValue" placeholder="1-5">
@@ -106,26 +111,26 @@
               <input class="btn btn-primary" type="submit" value="add">
             </div>
           </form>`
-        }
+    }
 
-function getAllPatches(){
-    url ='http://localhost:3000/api/patches';
-http.open("Get", url);
-http.send();
-http.onreadystatechange = (error)=> {
-    if (http.readyState === 4) {
-      document.querySelector('.tab-content').innerHTML = ``
-      JSON.parse(http.response).forEach(element => {
+    function getAllPatches() {
+      url = 'http://localhost:3000/api/patches';
+      http.open("Get", url);
+      http.send();
+      http.onreadystatechange = (error) => {
+        if (http.readyState === 4) {
+          document.querySelector('.tab-content').innerHTML = ``
+          JSON.parse(http.response).forEach(element => {
 
-    const httpUser = new XMLHttpRequest();
-    urlForUser ='http://localhost:3000/api/user?userID=' + element.userID;
-    httpUser.open("Get", urlForUser);
-    httpUser.send();
-    httpUser.onreadystatechange = (error)=> {
-      if (httpUser.readyState === 4) {
-        JSON.parse(httpUser.response).forEach(user => {
-        document.querySelector('.tab-content').innerHTML += 
-      `<div class="col-lg-3 col-sm-6 mb-4">
+            const httpUser = new XMLHttpRequest();
+            urlForUser = 'http://localhost:3000/api/user?userID=' + element.userID;
+            httpUser.open("Get", urlForUser);
+            httpUser.send();
+            httpUser.onreadystatechange = (error) => {
+              if (httpUser.readyState === 4) {
+                JSON.parse(httpUser.response).forEach(user => {
+                  document.querySelector('.tab-content').innerHTML +=
+                    `<div class="col-lg-3 col-sm-6 mb-4">
     <div class="card h-100">
       <img class="card-img-top" src="/images/${element.image}" alt="">
       <div class="card-body">
@@ -136,19 +141,25 @@ http.onreadystatechange = (error)=> {
          </form>
       </div>
     </div>
-  </div>`   });     }    }
-});}}}
-
-function deletePatch(id){
-  url ='http://localhost:3000/api/patch?patchID=' + id;
-http.open("Delete", url);
-http.send();
-http.onreadystatechange = (error)=> {
-    if (http.readyState === 4) {
-      getAllPatches()
+  </div>`   });
+              }
+            }
+          });
+        }
+      }
     }
-  }
-}
-      </script>
+
+    function deletePatch(id) {
+      url = 'http://localhost:3000/api/patch?patchID=' + id;
+      http.open("Delete", url);
+      http.send();
+      http.onreadystatechange = (error) => {
+        if (http.readyState === 4) {
+          getAllPatches()
+        }
+      }
+    }
+  </script>
 </body>
+
 </html>
