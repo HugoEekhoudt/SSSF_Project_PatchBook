@@ -20,7 +20,7 @@
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
           <form>
-            <input type="button" onclick="register()" value="register">
+            <input type="button" onclick="register()" value="register/login">
           </form>
         </li>
         <li class="nav-item active">
@@ -51,6 +51,16 @@
 
     function register() {
       document.querySelector('.tab-content').innerHTML = `
+      <form style="margin-top: 10px" method="POST" action="/api/login">
+            <div class="form-group">
+              <input type="text" class="form-control" name="username" placeholder="Username">
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" name="password" placeholder="Password">
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+          </form>
+          <br><br>
           <form style="margin-top: 10px" method="POST" action="/api/register">
             <div class="form-group">
               <input type="text" class="form-control" name="username" placeholder="Username">
@@ -137,8 +147,9 @@
         <h4 class="card-title">${element.name}</h4>
         <p class="card-title">Made by: ${user.username}</p>
         <form>
-         <input type="button" onclick="deletePatch('${element._id}')" value="Delete Patch">
+         <input type="button" onclick="deletePatch('${element._id}')" value="Delete">
          </form>
+         <a href='/api/updatePatch?idOfPatch=${element._id}' class='btn btn-primary'>Edit</a>
       </div>
     </div>
   </div>`   });

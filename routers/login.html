@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <title>login</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="page-content">
+            <form style="margin-top: 10px" method="POST" action="/api/login">
+                <div class="form-group">
+                  <input type="text" class="form-control" name="username" placeholder="Username">
+                </div>
+                <div class="form-group">
+                  <input type="password" class="form-control" name="password" placeholder="Password">
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+              </form>
+              <br><br>
+              <form style="margin-top: 10px" method="POST" action="/api/register">
+                <div class="form-group">
+                  <input type="text" class="form-control" name="username" placeholder="Username">
+                </div>
+                <div class="form-group">
+                  <input type="password" class="form-control" name="password" placeholder="Password">
+                </div>
+                <div class="form-group">
+                  <p>Has a overall</p>
+                  <select name="overall" size="2">
+                  <option value="true">Yes</option>
+                  <option value="false">No</option>
+                  </select>
+                </div>
+                <button type="submit" class="btn btn-warning">Register</button>
+              </form>
+    </div>
+  </div>
+</body>
+
+</html>

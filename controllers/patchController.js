@@ -22,6 +22,15 @@ exports.patches_list_get = () => {
     });
 };
 
+exports.patch_get_single = (data) => {
+  return Patch.find({_id: data}).then((patch) => {
+    return patch;
+  }).catch((err) => {
+    console.log(err);
+    return err;
+  });
+};
+
 exports.patch_update_single = (data) => {
     return Patch.updateOne({_id: data.idOfPatchToUpdate},{name: data.name, description: data.description, image: data.image}, (err, data) => {
       return {status: 'Update OK: ' + data};

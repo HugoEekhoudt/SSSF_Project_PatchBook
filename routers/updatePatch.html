@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta  charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>update</title>
+</head>
+<body>
+        <div class="container">
+                <div class="page-content">
+  
+                </div>
+            </div>
+            <script>
+            const http = new XMLHttpRequest();
+const url ='/api/patch?' + window.location.search.substr(1);
+http.open("Get", url);
+http.send();
+http.onreadystatechange = (error)=> {
+    if (http.readyState === 4) {
+            JSON.parse(http.response).forEach(element => {
+        document.querySelector('.page-content').innerHTML += `
+        <form method="POST" action="/api/patch">
+        patch name:<br>
+        <input type="text" value="${element.name}" id="newName" name="name">
+        <br>
+        patch description:<br>
+        <input type="text" value="${element.description}" id="newDescription" name="description">
+        <br>
+        image:<br>
+        <input type="file" id="newImage" value="${element.image}" name="image">
+        <br><br>
+        <input type="submit" value="save changes">
+        <input type="hidden" value="${element._id}" id="idToUpdate" name="idOfPatchToUpdate">
+      </form>`
+    });
+    }
+}
+            </script>
+</body>
+</html>
