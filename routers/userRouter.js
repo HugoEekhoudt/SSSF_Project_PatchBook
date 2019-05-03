@@ -3,6 +3,15 @@ const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
 
+
+const login = (req, res, next) => {
+    if(req.user){
+        next()
+    }else{
+        res.redirect('/api/login')
+    }
+  }
+  
 /**
      * @api {post} /api/register postSingleUser
      * @apiGroup User
@@ -31,6 +40,15 @@ router.get('/user', function (req, res) {
 });
 
 /**
+     * @api {get} /api/userID getUserIDByLogin
+     * @apiGroup User
+     * @apiSuccess {json} userID
+     */
+    router.get('/userID', login, function (req, res) {
+            res.send(req.user.id);
+    });
+
+/**
      * @api {patch} /api/user patchSingleUser
      * @apiGroup User
      * @apiParam {Number} idOfUserToUpdate
@@ -39,7 +57,7 @@ router.get('/user', function (req, res) {
      * @apiParam {Bool} overall
      * @apiSuccess {json} user
      */
-router.patch('/user', (req, res) => {
+router.patch('/user', login, (req, res) => {
     const data = req.body;
     userController.user_update_single(data).then((result) => {
         res.send(result);

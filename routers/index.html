@@ -89,7 +89,7 @@
     <input type="text" class="form-control" name="description" placeholder="description">
     <label>image of the patch</label> <br>
     <input type="file" name="image">
-    <input type="hidden" type="text" value="5cc17f43d5061d3fa0016c30" name="userID" <br> <br>
+    <input type="hidden" type="text" value="" name="userID" <br> <br>
     <input class="btn btn-primary" type="submit" value="add">
   </div>
 </form>`
@@ -139,20 +139,51 @@
             httpUser.onreadystatechange = (error) => {
               if (httpUser.readyState === 4) {
                 JSON.parse(httpUser.response).forEach(user => {
-                  document.querySelector('.tab-content').innerHTML +=
-                    `<div class="col-lg-3 col-sm-6 mb-4">
-    <div class="card h-100">
-      <img class="card-img-top" src="/images/${element.image}" alt="">
-      <div class="card-body">
-        <h4 class="card-title">${element.name}</h4>
-        <p class="card-title">Made by: ${user.username}</p>
-        <form>
-         <input type="button" onclick="deletePatch('${element._id}')" value="Delete">
-         </form>
-         <a href='/api/updatePatch?idOfPatch=${element._id}' class='btn btn-primary'>Edit</a>
-      </div>
-    </div>
-  </div>`   });
+
+                  const httpUserID = new XMLHttpRequest();
+                  urlForUserID = 'http://localhost:3000/api/userID';
+                  httpUserID.open("Get", urlForUserID);
+                  httpUserID.send();
+                  httpUserID.onreadystatechange = (error) => {
+                    if (httpUserID.readyState === 4) {
+                      if (user._id == httpUserID.response) {
+                        document.querySelector('.tab-content').innerHTML +=
+                          `<div class="col-lg-3 col-sm-6 mb-4">
+                          <div class="card h-100">
+                            <img class="card-img-top" src="/images/${element.image}" alt="">
+                            <div class="card-body">
+                              <h4 class="card-title">${element.name}</h4>
+                              <p class="card-title${element.name}">Made by: ${user.username}</p>
+                              <form> <input type="button" onclick="deletePatch('${element._id}')" value="Delete"></form>
+                           <a href='/api/updatePatch?idOfPatch=${element._id}' class='btn btn-primary'>Edit</a>
+                            </div>
+                          </div>
+                        </div>`
+                      }
+                      else {
+                        document.querySelector('.tab-content').innerHTML +=
+                          `<div class="col-lg-3 col-sm-6 mb-4">
+                          <div class="card h-100">
+                            <img class="card-img-top" src="/images/${element.image}" alt="">
+                            <div class="card-body">
+                              <h4 class="card-title">${element.name}</h4>
+                              <p class="card-title${element.name}">Made by: ${user.username}</p>
+                              <form method="POST" action="/api/rating">
+                            <div class="form-group">
+                              <label>rating amount</label>
+                              <input type="number" class="form-control" name="ratingValue" placeholder="1-5">
+                              <input type="hidden" type="text" value="${element._id}" name="patchID">
+                              <input type="hidden" type="text" value="" name="userID">
+                              <input class="btn btn-primary" type="submit" value="Rate">
+                            </div>
+                          </form>
+                            </div>
+                          </div>
+                        </div>`
+                      }
+                    }
+                  }
+                });
               }
             }
           });

@@ -26,6 +26,14 @@ passport.use(new LocalStrategy(
      }
  ));
 
+ const login = (req, res, next) => {
+  if(req.user){
+      next()
+  }else{
+      res.redirect('/api/login')
+  }
+}
+
 passport.serializeUser(function(user, done) {
 done(null, user.id);
 });
@@ -36,7 +44,7 @@ User.findById(id, function (err, user) {
 });
 });
 
-router.get('/',(req, res) => {
+router.get('/', login,(req, res) => {
   res.sendFile(__dirname + '/index.html')
 });
 
@@ -44,7 +52,7 @@ router.get('/login',(req, res) => {
   res.sendFile(__dirname + '/login.html')
 });
 
-router.get('/updatePatch', (req, res) => {
+router.get('/updatePatch', login, (req, res) => {
   res.sendFile(__dirname + '/updatePatch.html')
 });
 

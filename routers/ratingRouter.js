@@ -3,6 +3,14 @@ const express = require('express');
 const router = express.Router();
 const ratingController = require('../controllers/ratingController');
 
+const login = (req, res, next) => {
+  if(req.user){
+      next()
+  }else{
+      res.redirect('/api/login')
+  }
+}
+
 /**
      * @api {post} /api/rating postSingleRating
      * @apiGroup Rating
@@ -11,8 +19,10 @@ const ratingController = require('../controllers/ratingController');
      * @apiParam {String} userID
      * @apiSuccess {json} rating
      */
-router.post('/rating', (req, res) => {
-  const data = req.body;
+router.post('/rating', login, (req, res) => {
+  var data = req.body;
+  console.log(data)
+  data.userID = req.user.id
   ratingController.rating_create_post(data).then((result) => {
     res.send(result);
   });
