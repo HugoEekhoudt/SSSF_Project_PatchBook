@@ -12,7 +12,7 @@ const login = (req, res, next) => {
 }
 
 /**
-     * @api {post} /api/rating postSingleRating
+     * @api {post} /rating postSingleRating
      * @apiGroup Rating
      * @apiParam {Number} ratingValue
      * @apiParam {String} patchID
@@ -27,5 +27,16 @@ router.post('/rating', login, (req, res) => {
     res.send(result);
   });
 });
+
+/**
+     * @api {get} /ratings getAllRatings
+     * @apiGroup Rating
+     * @apiSuccess {json} ratings
+     */
+    router.get('/ratings', login, (req, res) => {
+      ratingController.ratings_get_all().then((result) => {
+          res.send(result);
+      });
+  });
 
 module.exports = router;

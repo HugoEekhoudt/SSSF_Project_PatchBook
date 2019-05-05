@@ -1,7 +1,7 @@
 {
   "name": "API for InstaPortfolio",
   "version": "1.0.0",
-  "description": "Offers Configurationsmanagement for the InstaPortfolio",
+  "description": "Offers Configurationsmanagement for the InstaPortfolio. Every endpoint starts with /api",
   "template": {
     "forceLanguage": "en"
   },
@@ -10,7 +10,7 @@
   "apidoc": "0.3.0",
   "generator": {
     "name": "apidoc",
-    "time": "2019-05-03T17:16:06.747Z",
+    "time": "2019-05-05T15:26:12.410Z",
     "url": "http://apidocjs.com",
     "version": "0.17.7"
   }

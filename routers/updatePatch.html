@@ -20,7 +20,7 @@ http.onreadystatechange = (error)=> {
     if (http.readyState === 4) {
             JSON.parse(http.response).forEach(element => {
         document.querySelector('.page-content').innerHTML += `
-        <form method="POST" action="/api/patch">
+        <form method="POST" action="/api/updatepatch">
         patch name:<br>
         <input type="text" value="${element.name}" id="newName" name="name">
         <br>

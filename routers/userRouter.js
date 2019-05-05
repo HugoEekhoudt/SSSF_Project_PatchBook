@@ -13,7 +13,7 @@ const login = (req, res, next) => {
   }
   
 /**
-     * @api {post} /api/register postSingleUser
+     * @api {post} /register postSingleUser
      * @apiGroup User
      * @apiParam {String} username
      * @apiParam {String} password
@@ -28,7 +28,7 @@ const login = (req, res, next) => {
     });
 
 /**
-     * @api {get} /api/user getSingleUser
+     * @api {get} /user getSingleUser
      * @apiGroup User
      * @apiParam {Number} userID
      * @apiSuccess {json} user
@@ -40,7 +40,7 @@ router.get('/user', function (req, res) {
 });
 
 /**
-     * @api {get} /api/userID getUserIDByLogin
+     * @api {get} /userID getUserIDByLogin
      * @apiGroup User
      * @apiSuccess {json} userID
      */
@@ -49,7 +49,7 @@ router.get('/user', function (req, res) {
     });
 
 /**
-     * @api {patch} /api/user patchSingleUser
+     * @api {patch} /user patchSingleUser
      * @apiGroup User
      * @apiParam {Number} idOfUserToUpdate
      * @apiParam {String} username

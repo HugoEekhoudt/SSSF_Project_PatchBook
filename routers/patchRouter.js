@@ -12,23 +12,23 @@ const login = (req, res, next) => {
   }
 
 /**
-     * @api {get} /api/patches getAllPatches
+     * @api {get} /patches getAllPatches
      * @apiGroup Patch
      * @apiSuccess {json} patches
      */
-router.get('/patches', login, (req, res) => {
+router.get('/patches', (req, res) => {
     patchController.patches_list_get().then((result) => {
         res.send(result);
     });
 });
 
 /**
-     * @api {get} /api/patch getSinglePatch
+     * @api {get} /patch getSinglePatch
      * @apiGroup Patch
      * @apiParam {String} idOfPatch
      * @apiSuccess {json} patch
      */
-    router.get('/patch', login, (req, res) => {
+    router.get('/patch', (req, res) => {
         const data = req.query.idOfPatch;
         patchController.patch_get_single(data).then((result) => {
             res.send(result);
@@ -36,7 +36,7 @@ router.get('/patches', login, (req, res) => {
     });
 
 /**
-     * @api {post} /api/updatepatch patchSinglePatch
+     * @api {post} /updatepatch patchSinglePatch
      * @apiGroup Patch
      * @apiParam {String} idOfPatchToUpdate
      * @apiParam {String} name
@@ -44,7 +44,7 @@ router.get('/patches', login, (req, res) => {
      * @apiParam {String} image
      * @apiSuccess {json} patch
      */
-router.post('/updatepatch', login , (req, res) => {
+router.post('/updatepatch', (req, res) => {
     const data = req.body;
     patchController.patch_update_single(data).then((result) => {
         res.send(result);
@@ -52,7 +52,7 @@ router.post('/updatepatch', login , (req, res) => {
 });
 
 /**
-     * @api {post} /api/patch postSinglePatch
+     * @api {post} /patch postSinglePatch
      * @apiGroup Patch
      * @apiParam {String} name
      * @apiParam {String} description
@@ -69,12 +69,12 @@ router.post('/updatepatch', login , (req, res) => {
     });
 
 /**
-     * @api {delete} /api/patch deleteSinglePatch
+     * @api {delete} /patch deleteSinglePatch
      * @apiGroup Patch
      * @apiParam {String} patchID
      * @apiSuccess {json} patch
      */
-router.delete('/patch', login, (req, res) => {
+router.delete('/patch', (req, res) => {
     patchController.patch_delete_single(req.query.patchID).then((result) => {
         res.send(result);
     });

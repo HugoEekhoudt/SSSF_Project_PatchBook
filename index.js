@@ -12,6 +12,19 @@ const userRouter = require('./routers/userRouter');
 const ratingRouter = require('./routers/ratingRouter');
 
 app.use(bodyParser())
+
+app.use((req,res,next)=>{
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Controll-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization')
+  if (req.method==='OPTIONS'){
+    res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET')
+  return res.status(200).json({
+
+  })
+  }
+  next()
+})
+
 app.use(session({ secret: process.env.SessionSeed, resave: false, saveUninitialized: false }))
 app.use(bodyParser.urlencoded({extended: true}));
 app.use("/images",express.static('images'))
@@ -19,7 +32,7 @@ app.use('/api', indexRouter, patchRouter, linkedPatchRouter, userRouter, ratingR
 
 // if mongoose < 5.x, force ES6 Promise
 // mongoose.Promise = global.Promise;
-mongoose.connect(`mongodb://${process.env.DB_USER}:${process.env.DB_PWD}@${process.env.DB_HOST}:${process.env.DB_PORT}/test`).then(() => {
+mongoose.connect(`${process.env.db}`).then(() => {
   console.log('Connected successfully.');
 }, err => {
   console.log('Connection to db failed: ' + err);

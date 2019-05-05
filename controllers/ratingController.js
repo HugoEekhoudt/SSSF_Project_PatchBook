@@ -11,7 +11,6 @@ exports.rating_create_post = (data) => {
       }
   
       return Rating.find({patchID: data.patchID, userID: data.userID}).then((rating) => {
-        console.log(rating)
         if(rating[0] != null) {
           return {status: 'Save ERROR: The patch already has a rating from this user'};
         }
@@ -25,3 +24,12 @@ exports.rating_create_post = (data) => {
   });
   });
   };
+
+  exports.ratings_get_all = () => {
+    return Rating.find().then((ratings) => {
+      return ratings;
+    }).catch((err) => {
+      console.log(err);
+      return err;
+    });
+};

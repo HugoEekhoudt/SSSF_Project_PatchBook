@@ -59,7 +59,7 @@ router.get('/updatePatch', login, (req, res) => {
 router.post('/login', 
   passport.authenticate('local', { 
     successRedirect: '/api', 
-    failureRedirect: '/login' })
+    failureRedirect: '/api/login' })
 );
 
 module.exports = router;

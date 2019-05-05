@@ -28,8 +28,31 @@ define({ "api": [
     "name": ""
   },
   {
+    "type": "get",
+    "url": "/linkedpatches",
+    "title": "getAllLinkedpatches",
+    "group": "LinkedPatch",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "json",
+            "optional": false,
+            "field": "linkedPatches",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "./routers/linkedPatchRouter.js",
+    "groupTitle": "LinkedPatch",
+    "name": "GetLinkedpatches"
+  },
+  {
     "type": "post",
-    "url": "/api/linkedpatch",
+    "url": "/linkedpatch",
     "title": "postSingleLinkedpatch",
     "group": "LinkedPatch",
     "parameter": {
@@ -68,11 +91,11 @@ define({ "api": [
     "version": "0.0.0",
     "filename": "./routers/linkedPatchRouter.js",
     "groupTitle": "LinkedPatch",
-    "name": "PostApiLinkedpatch"
+    "name": "PostLinkedpatch"
   },
   {
     "type": "delete",
-    "url": "/api/patch",
+    "url": "/patch",
     "title": "deleteSinglePatch",
     "group": "Patch",
     "parameter": {
@@ -104,11 +127,11 @@ define({ "api": [
     "version": "0.0.0",
     "filename": "./routers/patchRouter.js",
     "groupTitle": "Patch",
-    "name": "DeleteApiPatch"
+    "name": "DeletePatch"
   },
   {
     "type": "get",
-    "url": "/api/patch",
+    "url": "/patch",
     "title": "getSinglePatch",
     "group": "Patch",
     "parameter": {
@@ -140,11 +163,11 @@ define({ "api": [
     "version": "0.0.0",
     "filename": "./routers/patchRouter.js",
     "groupTitle": "Patch",
-    "name": "GetApiPatch"
+    "name": "GetPatch"
   },
   {
     "type": "get",
-    "url": "/api/patches",
+    "url": "/patches",
     "title": "getAllPatches",
     "group": "Patch",
     "success": {
@@ -163,11 +186,11 @@ define({ "api": [
     "version": "0.0.0",
     "filename": "./routers/patchRouter.js",
     "groupTitle": "Patch",
-    "name": "GetApiPatches"
+    "name": "GetPatches"
   },
   {
     "type": "post",
-    "url": "/api/patch",
+    "url": "/patch",
     "title": "postSinglePatch",
     "group": "Patch",
     "parameter": {
@@ -220,11 +243,11 @@ define({ "api": [
     "version": "0.0.0",
     "filename": "./routers/patchRouter.js",
     "groupTitle": "Patch",
-    "name": "PostApiPatch"
+    "name": "PostPatch"
   },
   {
     "type": "post",
-    "url": "/api/updatepatch",
+    "url": "/updatepatch",
     "title": "patchSinglePatch",
     "group": "Patch",
     "parameter": {
@@ -277,11 +300,34 @@ define({ "api": [
     "version": "0.0.0",
     "filename": "./routers/patchRouter.js",
     "groupTitle": "Patch",
-    "name": "PostApiUpdatepatch"
+    "name": "PostUpdatepatch"
+  },
+  {
+    "type": "get",
+    "url": "/ratings",
+    "title": "getAllRatings",
+    "group": "Rating",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "json",
+            "optional": false,
+            "field": "ratings",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "./routers/ratingRouter.js",
+    "groupTitle": "Rating",
+    "name": "GetRatings"
   },
   {
     "type": "post",
-    "url": "/api/rating",
+    "url": "/rating",
     "title": "postSingleRating",
     "group": "Rating",
     "parameter": {
@@ -327,11 +373,11 @@ define({ "api": [
     "version": "0.0.0",
     "filename": "./routers/ratingRouter.js",
     "groupTitle": "Rating",
-    "name": "PostApiRating"
+    "name": "PostRating"
   },
   {
     "type": "get",
-    "url": "/api/user",
+    "url": "/user",
     "title": "getSingleUser",
     "group": "User",
     "parameter": {
@@ -363,11 +409,11 @@ define({ "api": [
     "version": "0.0.0",
     "filename": "./routers/userRouter.js",
     "groupTitle": "User",
-    "name": "GetApiUser"
+    "name": "GetUser"
   },
   {
     "type": "get",
-    "url": "/api/userID",
+    "url": "/userID",
     "title": "getUserIDByLogin",
     "group": "User",
     "success": {
@@ -386,11 +432,11 @@ define({ "api": [
     "version": "0.0.0",
     "filename": "./routers/userRouter.js",
     "groupTitle": "User",
-    "name": "GetApiUserid"
+    "name": "GetUserid"
   },
   {
     "type": "patch",
-    "url": "/api/user",
+    "url": "/user",
     "title": "patchSingleUser",
     "group": "User",
     "parameter": {
@@ -443,11 +489,11 @@ define({ "api": [
     "version": "0.0.0",
     "filename": "./routers/userRouter.js",
     "groupTitle": "User",
-    "name": "PatchApiUser"
+    "name": "PatchUser"
   },
   {
     "type": "post",
-    "url": "/api/register",
+    "url": "/register",
     "title": "postSingleUser",
     "group": "User",
     "parameter": {
@@ -493,6 +539,6 @@ define({ "api": [
     "version": "0.0.0",
     "filename": "./routers/userRouter.js",
     "groupTitle": "User",
-    "name": "PostApiRegister"
+    "name": "PostRegister"
   }
 ] });

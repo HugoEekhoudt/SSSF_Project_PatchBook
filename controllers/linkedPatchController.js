@@ -25,3 +25,12 @@ exports.linkedpatch_create_post = (data) => {
   });
   });
   };
+
+  exports.linkedpatch_list_get = () => {
+    return LinkedPatch.find().then((linkedpatches) => {
+      return linkedpatches;
+    }).catch((err) => {
+      console.log(err);
+      return err;
+    });
+};
