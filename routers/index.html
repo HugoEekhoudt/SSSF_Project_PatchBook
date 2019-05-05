@@ -38,6 +38,11 @@
             <input type="button" onclick="createRating()" value="create Rating">
           </form>
         </li>
+        <li class="nav-item active">
+          <form method="POST" action="/api/logout">
+            <input type="submit" value="logout">
+          </form>
+        </li>
       </ul>
     </div>
   </nav>
@@ -175,6 +180,13 @@
                               <input type="hidden" type="text" value="${element._id}" name="patchID">
                               <input type="hidden" type="text" value="" name="userID">
                               <input class="btn btn-primary" type="submit" value="Rate">
+                            </div>
+                          </form>
+                          <form method="POST" action="/api/linkedpatch">
+                            <div class="form-group">
+                              <input type="hidden" type="text" value="${element._id}" name="patchID">
+                              <input type="hidden" type="text" value="" name="userID">
+                              <input class="btn btn-primary" type="submit" value="Link">
                             </div>
                           </form>
                             </div>

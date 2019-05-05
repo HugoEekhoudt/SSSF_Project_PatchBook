@@ -11,7 +11,8 @@ const linkedPatchController = require('../controllers/linkedPatchController');
      * @apiSuccess {json} linkedpatch
      */
 router.post('/linkedpatch', (req, res) => {
-    const data = req.body;
+    var data = req.body;
+    data.userID = req.user.id
     linkedPatchController.linkedpatch_create_post(data).then((result) => {
         res.send(result);
     });

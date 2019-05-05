@@ -1,7 +1,7 @@
 {
     "name": "API for InstaPortfolio",
     "version": "1.0.0",
-    "description": "Offers Configurationsmanagement for the InstaPortfolio",
+    "description": "Offers Configurationsmanagement for the InstaPortfolio. Every endpoint starts with /api/",
     "template": {
         "forceLanguage": "en"
     }

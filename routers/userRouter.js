@@ -64,4 +64,9 @@ router.patch('/user', login, (req, res) => {
     });
 });
 
+router.post('/logout', function(req, res){
+    req.logout()
+    res.redirect('/api/login')
+  })
+
 module.exports = router;

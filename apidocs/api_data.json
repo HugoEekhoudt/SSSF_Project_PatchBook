@@ -66,7 +66,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "./routers/apiRouter.js",
+    "filename": "./routers/linkedPatchRouter.js",
     "groupTitle": "LinkedPatch",
     "name": "PostApiLinkedpatch"
   },
@@ -102,9 +102,45 @@
       }
     },
     "version": "0.0.0",
-    "filename": "./routers/apiRouter.js",
+    "filename": "./routers/patchRouter.js",
     "groupTitle": "Patch",
     "name": "DeleteApiPatch"
+  },
+  {
+    "type": "get",
+    "url": "/api/patch",
+    "title": "getSinglePatch",
+    "group": "Patch",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "idOfPatch",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "json",
+            "optional": false,
+            "field": "patch",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "./routers/patchRouter.js",
+    "groupTitle": "Patch",
+    "name": "GetApiPatch"
   },
   {
     "type": "get",
@@ -125,66 +161,9 @@
       }
     },
     "version": "0.0.0",
-    "filename": "./routers/apiRouter.js",
+    "filename": "./routers/patchRouter.js",
     "groupTitle": "Patch",
     "name": "GetApiPatches"
-  },
-  {
-    "type": "patch",
-    "url": "/api/patch",
-    "title": "patchSinglePatch",
-    "group": "Patch",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "idOfPatchToUpdate",
-            "description": ""
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "name",
-            "description": ""
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "description",
-            "description": ""
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "image",
-            "description": ""
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "json",
-            "optional": false,
-            "field": "patch",
-            "description": ""
-          }
-        ]
-      }
-    },
-    "version": "0.0.0",
-    "filename": "./routers/apiRouter.js",
-    "groupTitle": "Patch",
-    "name": "PatchApiPatch"
   },
   {
     "type": "post",
@@ -239,9 +218,66 @@
       }
     },
     "version": "0.0.0",
-    "filename": "./routers/apiRouter.js",
+    "filename": "./routers/patchRouter.js",
     "groupTitle": "Patch",
     "name": "PostApiPatch"
+  },
+  {
+    "type": "post",
+    "url": "/api/updatepatch",
+    "title": "patchSinglePatch",
+    "group": "Patch",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "idOfPatchToUpdate",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "description",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "image",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "json",
+            "optional": false,
+            "field": "patch",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "./routers/patchRouter.js",
+    "groupTitle": "Patch",
+    "name": "PostApiUpdatepatch"
   },
   {
     "type": "post",
@@ -289,7 +325,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "./routers/apiRouter.js",
+    "filename": "./routers/ratingRouter.js",
     "groupTitle": "Rating",
     "name": "PostApiRating"
   },
@@ -325,9 +361,32 @@
       }
     },
     "version": "0.0.0",
-    "filename": "./routers/apiRouter.js",
+    "filename": "./routers/userRouter.js",
     "groupTitle": "User",
     "name": "GetApiUser"
+  },
+  {
+    "type": "get",
+    "url": "/api/userID",
+    "title": "getUserIDByLogin",
+    "group": "User",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "json",
+            "optional": false,
+            "field": "userID",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "./routers/userRouter.js",
+    "groupTitle": "User",
+    "name": "GetApiUserid"
   },
   {
     "type": "patch",
@@ -382,7 +441,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "./routers/apiRouter.js",
+    "filename": "./routers/userRouter.js",
     "groupTitle": "User",
     "name": "PatchApiUser"
   },
@@ -432,7 +491,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "./routers/apiRouter.js",
+    "filename": "./routers/userRouter.js",
     "groupTitle": "User",
     "name": "PostApiRegister"
   }
