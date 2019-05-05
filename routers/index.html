@@ -71,7 +71,7 @@
     }
 
     function getAllLinkedpatches() {
-      url = 'http://localhost:3000/api/linkedpatches';
+      url = 'https://patchbook.jelastic.metropolia.fi/api/linkedpatches';
       http.open("Get", url);
       http.send();
       http.onreadystatechange = (error) => {
@@ -89,7 +89,7 @@
           JSON.parse(http.response).forEach(element => {
 
             const httpUser = new XMLHttpRequest();
-            urlForUser = 'http://localhost:3000/api/user?userID=' + element.userID;
+            urlForUser = 'https://patchbook.jelastic.metropolia.fi/api/user?userID=' + element.userID;
             httpUser.open("Get", urlForUser);
             httpUser.send();
             httpUser.onreadystatechange = (error) => {
@@ -97,7 +97,7 @@
                 JSON.parse(httpUser.response).forEach(user => {
 
                   const httpPatch = new XMLHttpRequest();
-                  urlPatch = 'http://localhost:3000/api/patch?idOfPatch=' + element.patchID;
+                  urlPatch = 'https://patchbook.jelastic.metropolia.fi/api/patch?idOfPatch=' + element.patchID;
                   httpPatch.open("Get", urlPatch);
                   httpPatch.send();
                   httpPatch.onreadystatechange = (error) => {
@@ -123,7 +123,7 @@
     }
 
     function getAllRatings() {
-      url = 'http://localhost:3000/api/ratings';
+      url = 'https://patchbook.jelastic.metropolia.fi/api/ratings';
       http.open("Get", url);
       http.send();
       http.onreadystatechange = (error) => {
@@ -142,7 +142,7 @@
           JSON.parse(http.response).forEach(element => {
 
             const httpUser = new XMLHttpRequest();
-            urlForUser = 'http://localhost:3000/api/user?userID=' + element.userID;
+            urlForUser = 'https://patchbook.jelastic.metropolia.fi/api/user?userID=' + element.userID;
             httpUser.open("Get", urlForUser);
             httpUser.send();
             httpUser.onreadystatechange = (error) => {
@@ -150,7 +150,7 @@
                 JSON.parse(httpUser.response).forEach(user => {
 
                   const httpPatch = new XMLHttpRequest();
-                  urlPatch = 'http://localhost:3000/api/patch?idOfPatch=' + element.patchID;
+                  urlPatch = 'https://patchbook.jelastic.metropolia.fi/api/patch?idOfPatch=' + element.patchID;
                   httpPatch.open("Get", urlPatch);
                   httpPatch.send();
                   httpPatch.onreadystatechange = (error) => {
@@ -177,7 +177,7 @@
     }
 
     function getAllPatches() {
-      url = 'http://localhost:3000/api/patches';
+      url = 'https://patchbook.jelastic.metropolia.fi/api/patches';
       http.open("Get", url);
       http.send();
       http.onreadystatechange = (error) => {
@@ -186,7 +186,7 @@
           JSON.parse(http.responseText).forEach(element => {
 
             const httpUser = new XMLHttpRequest();
-            urlForUser = 'http://localhost:3000/api/user?userID=' + element.userID;
+            urlForUser = 'https://patchbook.jelastic.metropolia.fi/api/user?userID=' + element.userID;
             httpUser.open("Get", urlForUser);
             httpUser.send();
             httpUser.onreadystatechange = (error) => {
@@ -194,7 +194,7 @@
                 JSON.parse(httpUser.responseText).forEach(user => {
 
                   const httpUserID = new XMLHttpRequest();
-                  urlForUserID = 'http://localhost:3000/api/userID';
+                  urlForUserID = 'https://patchbook.jelastic.metropolia.fi/api/userID';
                   httpUserID.open("Get", urlForUserID);
                   httpUserID.send();
                   httpUserID.onreadystatechange = (error) => {
@@ -252,7 +252,7 @@
     }
 
     function deletePatch(id) {
-      url = 'http://localhost:3000/api/patch?patchID=' + id;
+      url = 'https://patchbook.jelastic.metropolia.fi/api/patch?patchID=' + id;
       http.open("Delete", url);
       http.send();
       http.onreadystatechange = (error) => {
