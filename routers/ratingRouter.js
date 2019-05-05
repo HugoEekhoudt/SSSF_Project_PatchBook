@@ -33,7 +33,7 @@ router.post('/rating', login, (req, res) => {
      * @apiGroup Rating
      * @apiSuccess {json} ratings
      */
-    router.get('/ratings', login, (req, res) => {
+    router.get('/ratings', (req, res) => {
       ratingController.ratings_get_all().then((result) => {
           res.send(result);
       });
